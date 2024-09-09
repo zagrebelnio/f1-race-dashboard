@@ -18,7 +18,6 @@ function Navbar() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Home
             </NavLink>
@@ -27,7 +26,6 @@ function Navbar() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Drivers
             </NavLink>
@@ -36,7 +34,6 @@ function Navbar() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Constructors
             </NavLink>
@@ -45,7 +42,6 @@ function Navbar() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Standings
             </NavLink>
@@ -54,14 +50,12 @@ function Navbar() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
-              end
             >
               Results
             </NavLink>
           </div>
         </nav>
       </header>
-      <h1>bla bla bla</h1>
     </>
   );
 }

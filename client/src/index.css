@@ -29,3 +29,7 @@ body {
   height: 200vh;
   font-family: var(--font-family-montserrat);
 }
+
+main {
+  margin-top: 50px;
+}
