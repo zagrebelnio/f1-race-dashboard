@@ -1,10 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Root Layout</div>,
+    element: <Navbar />,
     errorElement: <div>Error Page</div>,
     children: [
       {
