@@ -1,9 +1,21 @@
+@font-face {
+  font-family: "Formula1-Regular";
+  src: url("./fonts/formula1/Formula1-Regular.otf");
+}
+
+@font-face {
+  font-family: "Formula1-Bold";
+  src: url("./fonts/formula1/Formula1-Bold.otf");
+}
+
 :root {
   --color-black: #000000;
   --color-white: #FFFFFF;
   --color-red: #FF232B;
 
   --font-family-montserrat: 'Montserrat', sans-serif;
+  --font-family-f1-regular: 'Formula1-Regular', sans-serif;
+  --font-family-f1-bold: 'Formula1-Bold', sans-serif;
 
   --font-size-16: 16px;
 }
