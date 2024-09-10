@@ -1,0 +1,27 @@
+.title {
+  height: 900px;
+  width: 100%;
+  background-image: url("https://www.f1-fansite.com/wp-content/uploads/2024/08/7-sunday-spa-francorchamps-2024.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.title h1 {
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: var(--font-size-96);
+  text-align: center;
+  width: 1200px;
+}
