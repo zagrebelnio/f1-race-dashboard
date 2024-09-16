@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import RootLayout from "./pages/Root";
 import HomePage from "./pages/Home";
+import DriversPage from "./pages/Drivers";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "drivers",
-        element: <div>Drivers Page</div>,
+        element: <DriversPage />,
       },
       {
         path: "constructors",
