@@ -3,6 +3,7 @@ import "./App.css";
 import RootLayout from "./pages/Root";
 import HomePage from "./pages/Home";
 import DriversPage from "./pages/Drivers";
+import ConstructorsPage from "./pages/Constructors";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "constructors",
-        element: <div>Constructors Page</div>,
+        element: <ConstructorsPage />,
       },
       {
         path: "standings",
