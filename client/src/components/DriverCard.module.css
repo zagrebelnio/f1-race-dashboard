@@ -30,21 +30,22 @@
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .number {
-  font-size: var(--font-size-40);
+  font-size: var(--font-size-24);
   font-family: var(--font-family-f1-bold);
   font-weight: bold;
 }
 
 .flag {
-  width: 45px;
-  height: 30px;
+  width: 42px;
+  height: 28px;
   object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .img {
