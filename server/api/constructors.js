@@ -1,5 +1,4 @@
 import express from 'express';
-import axios from 'axios';
 import pool from './db.js';
 
 const router = express.Router();
