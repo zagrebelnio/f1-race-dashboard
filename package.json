@@ -1,0 +1,18 @@
+{
+  "name": "f1-race-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/index.js --watch server",
+    "client": "npm run start --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
