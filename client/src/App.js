@@ -1,13 +1,14 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
-import RootLayout from "./pages/Root";
-import HomePage from "./pages/Home";
-import DriversPage from "./pages/Drivers";
-import ConstructorsPage from "./pages/Constructors";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
+import RootLayout from './pages/Root';
+import HomePage from './pages/Home';
+import DriversPage from './pages/Drivers';
+import ConstructorsPage from './pages/Constructors';
+import ComparisonPage from './pages/Comparison';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     errorElement: <div>Error Page</div>,
     children: [
@@ -16,20 +17,24 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "drivers",
+        path: 'drivers',
         element: <DriversPage />,
       },
       {
-        path: "constructors",
+        path: 'constructors',
         element: <ConstructorsPage />,
       },
       {
-        path: "standings",
+        path: 'standings',
         element: <div>Standings Page</div>,
       },
       {
-        path: "results",
+        path: 'results',
         element: <div>Results Page</div>,
+      },
+      {
+        path: 'comparison',
+        element: <ComparisonPage />,
       },
     ],
   },
