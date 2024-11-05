@@ -6,6 +6,7 @@ import classes from './Comparison.module.css';
 function ComparisonPage() {
   const [seasons, setSeasons] = useState([]);
   const [season, setSeason] = useState(2024);
+  const [type, setType] = useState('drivers');
 
   useEffect(() => {
     const fetchSeasons = async () => {
@@ -19,12 +20,27 @@ function ComparisonPage() {
     fetchSeasons();
   }, []);
 
+  useEffect(() => {
+    const fetchResults = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/${type}?season=${season}`
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log('Error fetching results: ', error);
+      }
+    };
+    fetchResults();
+  }, [season, type]);
+
   return (
     <>
       <section className={classes.search}>
         <select
           name="season"
           id="season"
+          value={season}
           onChange={(e) => setSeason(e.target.value)}
         >
           {seasons.map((season) => (
@@ -33,7 +49,26 @@ function ComparisonPage() {
             </option>
           ))}
         </select>
+        <label htmlFor="drivers">Drivers</label>
+        <input
+          type="radio"
+          name="type"
+          id="drivers"
+          value="drivers"
+          checked={type === 'drivers'}
+          onChange={(e) => setType(e.target.value)}
+        />
+        <label htmlFor="constructors">Constructors</label>
+        <input
+          type="radio"
+          name="type"
+          id="constructors"
+          value="constructors"
+          checked={type === 'constructors'}
+          onChange={(e) => setType(e.target.value)}
+        />
       </section>
+      <section className={classes.content}></section>
     </>
   );
 }
