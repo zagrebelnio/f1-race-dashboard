@@ -1,12 +1,36 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import classes from './Comparison.module.css';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function ComparisonPage() {
   const [seasons, setSeasons] = useState([]);
   const [season, setSeason] = useState(2024);
   const [type, setType] = useState('drivers');
+  const [lineChartData, setLineChartData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
   useEffect(() => {
     const fetchSeasons = async () => {
@@ -24,15 +48,27 @@ function ComparisonPage() {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/${type}?season=${season}`
+          `http://localhost:8080/api/comparisons/constructors?season=${season}`
         );
-        console.log(response.data);
+        const newData = {
+          labels: response.data.labels,
+          datasets: response.data.data.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.data,
+            borderColor: dataset.borderColor ?? '#000000',
+            fill: false,
+            tension: 0.1,
+          })),
+        };
+
+        console.log(newData);
+        setLineChartData(newData);
       } catch (error) {
-        console.log('Error fetching results: ', error);
+        console.log('Error fetching comparisons data: ', error);
       }
     };
     fetchResults();
-  }, [season, type]);
+  }, [season]);
 
   return (
     <>
@@ -68,7 +104,9 @@ function ComparisonPage() {
           onChange={(e) => setType(e.target.value)}
         />
       </section>
-      <section className={classes.content}></section>
+      <section className={classes.content}>
+        <Line data={lineChartData} />
+      </section>
     </>
   );
 }
