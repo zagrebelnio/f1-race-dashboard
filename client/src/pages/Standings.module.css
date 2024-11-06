@@ -1,0 +1,37 @@
+.mainSection{
+    margin: 0;
+    padding: 0;
+    background-image: url("../assets/background_standings.png");
+}
+
+.search {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    height: 80px;
+    background-color: var(--color-gray);
+  }
+
+.search select {
+    background-color: var(--color-white);
+    border: none;
+    padding: 6px 20px;
+    font-size: var(--font-size-24);
+    font-family: var(--font-family-montserrat);
+    border-radius: 15px;
+    cursor: pointer;
+}  
+.search div{
+    display: flex;
+    gap: 20px;
+}
+.search button{
+    background-color: var(--color-white);
+    font-size: var(--font-size-24);
+    font-family: var(--font-family-montserrat);
+    padding: 6px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}

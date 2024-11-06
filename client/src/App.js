@@ -4,6 +4,7 @@ import RootLayout from "./pages/Root";
 import HomePage from "./pages/Home";
 import DriversPage from "./pages/Drivers";
 import ConstructorsPage from "./pages/Constructors";
+import Standings from "./pages/Standings";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "standings",
-        element: <div>Standings Page</div>,
+        element: <Standings />,
       },
       {
         path: "results",
