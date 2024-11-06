@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import classes from './Standings.module.css'
 import DriversTable from '../components/DriverTable.js'
 
@@ -7,12 +8,17 @@ const options = {
 
 
 function Standings (){
+    const [activeButton, setActiveButton] = useState("drivers");
   return (
     <div className={classes.mainSection}>
         <section className={classes.search}>
             <div>
-                <button>Drivers</button>
-                <button>Constructors</button>
+                <button onClick={() => setActiveButton("drivers")} 
+                className={activeButton === "drivers" ? classes.activeButton : classes.normalButton}>
+                    Drivers</button>
+                <button onClick={() => setActiveButton("constructors")}
+                 className={activeButton === "constructors" ? classes.activeButton : classes.normalButton}>
+                    Constructors</button>
             </div>
             <select name="season" id="season">
             {options.seasons.map((season) => (
@@ -23,10 +29,11 @@ function Standings (){
             </select>
         </section>
         <section className={classes.content}>
-            <DriversTable/>
+            <DriversTable activeButton={activeButton}/>
         </section>
     </div>
   )
 }
 
 export default Standings
+

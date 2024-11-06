@@ -22,16 +22,27 @@
     border-radius: 15px;
     cursor: pointer;
 }  
+
 .search div{
     display: flex;
     gap: 20px;
 }
+
+
 .search button{
-    background-color: var(--color-white);
     font-size: var(--font-size-24);
     font-family: var(--font-family-montserrat);
     padding: 6px 20px;
     border: none;
     border-radius: 15px;
     cursor: pointer;
+}
+
+.normalButton{
+    background-color: var(--color-white);
+}
+
+.activeButton{
+    background-color: var(--color-red);
+    color: white;
 }
