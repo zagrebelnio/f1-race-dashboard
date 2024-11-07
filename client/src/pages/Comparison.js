@@ -105,7 +105,33 @@ function ComparisonPage() {
         />
       </section>
       <section className={classes.content}>
-        <Line data={lineChartData} />
+        <Line
+          data={lineChartData}
+          options={{
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'left',
+                labels: {
+                  font: {
+                    size: 16,
+                    family: 'Montserrat',
+                  },
+                },
+              },
+              title: {
+                display: true,
+                text: `Points progression for ${type} championship in ${season}`,
+                font: {
+                  size: 24,
+                  family: 'Montserrat',
+                },
+              },
+            },
+          }}
+          height={600}
+        />
       </section>
     </>
   );
