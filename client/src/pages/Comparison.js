@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import SectionButton from '../components/SectionButton';
 import classes from './Comparison.module.css';
 
 ChartJS.register(
@@ -85,24 +86,18 @@ function ComparisonPage() {
             </option>
           ))}
         </select>
-        <label htmlFor="drivers">Drivers</label>
-        <input
-          type="radio"
-          name="type"
-          id="drivers"
-          value="drivers"
-          checked={type === 'drivers'}
-          onChange={(e) => setType(e.target.value)}
-        />
-        <label htmlFor="constructors">Constructors</label>
-        <input
-          type="radio"
-          name="type"
-          id="constructors"
-          value="constructors"
-          checked={type === 'constructors'}
-          onChange={(e) => setType(e.target.value)}
-        />
+        <SectionButton
+          isSelected={type === 'drivers'}
+          onClick={() => setType('drivers')}
+        >
+          Drivers
+        </SectionButton>
+        <SectionButton
+          isSelected={type === 'constructors'}
+          onClick={() => setType('constructors')}
+        >
+          Consrtuctors
+        </SectionButton>
       </section>
       <section className={classes.content}>
         <Line
