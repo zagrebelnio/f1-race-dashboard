@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Colors,
 } from 'chart.js';
 import SectionButton from '../components/SectionButton';
 import classes from './Comparison.module.css';
@@ -21,7 +22,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Colors
 );
 
 function ComparisonPage() {
@@ -49,7 +51,7 @@ function ComparisonPage() {
     const fetchResults = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/comparisons/constructors?season=${season}`
+          `http://localhost:8080/api/comparisons/${type}?season=${season}`
         );
         const newData = {
           labels: response.data.labels,
@@ -69,7 +71,7 @@ function ComparisonPage() {
       }
     };
     fetchResults();
-  }, [season]);
+  }, [type, season]);
 
   return (
     <>
@@ -123,9 +125,12 @@ function ComparisonPage() {
                   family: 'Montserrat',
                 },
               },
+              colors: {
+                forceOverride: type === 'drivers',
+              },
             },
           }}
-          height={600}
+          height={700}
         />
       </section>
     </>
