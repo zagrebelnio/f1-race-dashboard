@@ -18,12 +18,19 @@ router.get('/', async (req, res) => {
 
     const { rows } = await pool.query(query, [season]);
 
-    const labels = [...new Set(rows.map((row) => row.abbreviation))];
+    const labelsMap = new Map();
+    rows.forEach((row) => {
+      if (!labelsMap.has(row.round)) {
+        labelsMap.set(row.round, row.abbreviation);
+      }
+    });
+
+    const labels = Array.from(labelsMap.values());
 
     const teams = {};
 
     rows.forEach((row) => {
-      const { name, color, abbreviation, points } = row;
+      const { name, color, round, abbreviation, points } = row;
 
       if (!teams[name]) {
         teams[name] = {
@@ -33,7 +40,7 @@ router.get('/', async (req, res) => {
         };
       }
 
-      const roundIndex = labels.indexOf(abbreviation);
+      const roundIndex = Array.from(labelsMap.keys()).indexOf(round);
       if (roundIndex !== -1) {
         teams[name].data[roundIndex] = parseFloat(points);
       }

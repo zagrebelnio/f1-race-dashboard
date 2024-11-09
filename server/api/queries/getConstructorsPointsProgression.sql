@@ -1,6 +1,7 @@
 SELECT
 	c.name,
 	c.color,
+	r.round,
 	gp.abbreviation,
 	rcs.points
 FROM race_constructor_standing rcs
