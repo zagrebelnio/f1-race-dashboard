@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import logo from "../assets/logo.svg";
-import classes from "./Navbar.module.css";
+import logo from '../assets/logo.svg';
+import classes from './Navbar.module.css';
 
 function Navbar() {
   return (
@@ -52,6 +52,14 @@ function Navbar() {
               }
             >
               Results
+            </NavLink>
+            <NavLink
+              to="/comparison"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              Comparison
             </NavLink>
           </div>
         </nav>
