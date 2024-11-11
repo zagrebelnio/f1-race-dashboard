@@ -120,6 +120,17 @@ async function getRaceResults(year, round) {
   }
 }
 
+async function getDriverCareerStats(id) {
+  try {
+    const query = readQuery(path.join(queriesPath, 'getDriverCareerStats.sql'));
+    const { rows } = await pool.query(query, [id]);
+    return rows;
+  } catch (err) {
+    console.log('Error fetching driver career stats:', err);
+    throw err;
+  }
+}
+
 export {
   getDrivers,
   getConstructors,
@@ -131,4 +142,5 @@ export {
   getPracticeResults,
   getQualifyingResults,
   getRaceResults,
+  getDriverCareerStats,
 };
