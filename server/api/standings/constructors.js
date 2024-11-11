@@ -1,6 +1,5 @@
 import express from 'express';
-import pool from '../db.js';
-import readQuery from '../util/readQuery.js';
+import { getConstructorsStandings } from '../database/index.js';
 
 const router = express.Router();
 
@@ -12,11 +11,7 @@ router.get('/', async (req, res) => {
       return res.status(400).json({ error: 'Season parameter is required' });
     }
 
-    const query = readQuery(
-      './server/api/queries/getConstructorsStandings.sql'
-    );
-
-    const { rows } = await pool.query(query, [season]);
+    const rows = await getConstructorsStandings(season);
 
     const data = rows.map((row) => ({
       position: row.position,
