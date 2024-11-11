@@ -4,7 +4,11 @@ import defaultDriverImage from '../assets/default-driver.png';
 
 function DriverCard({ driver }) {
   return (
-    <div className={classes.card} style={{ borderColor: driver.team.color }}>
+    <div
+      id={driver.id}
+      className={classes.card}
+      style={{ borderColor: driver.team.color }}
+    >
       <div className={classes.profile}>
         <div className={classes.info}>
           <p className={classes.abbreviation}>{driver.abbr}</p>
