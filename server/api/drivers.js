@@ -1,6 +1,7 @@
 import express from 'express';
 import { getDrivers, getDriverCareerStats } from './database/index.js';
 import fetchDriverImages from './util/fetchDriverImages.js';
+import fetchDriverImageByName from './util/fetchDriverImageByName.js';
 
 const router = express.Router();
 
@@ -64,6 +65,8 @@ router.get('/:id', async (req, res) => {
 
     const [row] = rows;
 
+    const driverImage = await fetchDriverImageByName(row.name);
+
     const driverData = {
       id: row.id,
       name: row.name,
@@ -72,6 +75,7 @@ router.get('/:id', async (req, res) => {
       fullName: row.full_name,
       abbreviation: row.abbreviation,
       permanentNumber: row.permanent_number,
+      image: driverImage,
       gender: row.gender,
       dateOfBirth: row.date_of_birth,
       dateOfDeath: row.date_of_death,
