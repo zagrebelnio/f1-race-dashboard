@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 200px;
+  background-image: var(--gradient);
+  background-size: 300%;
+  animation: bg-animation 15s infinite;
+}
+
+.profile {
+  background-color: var(--color-gray);
+  font-family: var(--font-family-f1-regular);
+  display: flex;
+  gap: 20px;
+}
+
+.profilePic {
+  height: 300px;
+  width: 300px;
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info h1 {
+  font-size: var(--font-size-40);
+}
+
+.info p {
+  font-size: var(--font-size-36);
+}
+
+.nationality {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.flag {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}

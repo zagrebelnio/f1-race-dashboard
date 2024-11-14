@@ -23,7 +23,7 @@ function DriverPage() {
   }, [id]);
 
   return (
-    <>
+    <section className={classes.container}>
       <section className={classes.profile}>
         <img
           className={classes.profilePic}
@@ -56,7 +56,7 @@ function DriverPage() {
           </div>
         ))}
       </div>
-    </>
+    </section>
   );
 }
 
