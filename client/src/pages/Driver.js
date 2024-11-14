@@ -38,7 +38,7 @@ function DriverPage() {
               src={`https://flagsapi.com/${driverData.countryCode}/flat/64.png`}
               alt="Flag"
             />
-            <p>{driverData.nationality}</p>
+            <p>{driverData.countryName}</p>
           </div>
           <p>{driverData.abbreviation}</p>
           <p>{driverData.number ?? 'N/A'}</p>
