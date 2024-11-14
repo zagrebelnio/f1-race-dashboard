@@ -6,6 +6,7 @@ import DriversPage from './pages/Drivers';
 import ConstructorsPage from './pages/Constructors';
 import ComparisonPage from './pages/Comparison';
 import DriverPage from './pages/Driver';
+import ConstructorPage from './pages/Constructor';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'constructors',
-        element: <ConstructorsPage />,
+        children: [
+          {
+            index: true,
+            element: <ConstructorsPage />,
+          },
+          {
+            path: ':id',
+            element: <ConstructorPage />,
+          },
+        ],
       },
       {
         path: 'standings',

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getConstructorStats } from './database/index.js';
+import { getConstructors, getConstructorStats } from './database/index.js';
 
 const router = express.Router();
 
