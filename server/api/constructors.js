@@ -1,5 +1,5 @@
 import express from 'express';
-import pool from './db.js';
+import { getConstructors } from './database/index.js';
 
 const router = express.Router();
 
@@ -11,20 +11,7 @@ router.get('/', async (req, res) => {
   }
 
   try {
-    const query = `
-      SELECT 
-        c.id, 
-        c.name, 
-        c.logo, 
-        c.color
-      FROM 
-        season_constructor sc
-      JOIN constructor c ON sc.constructor_id = c.id
-      WHERE sc.year = $1
-      ORDER BY position_number ASC;
-    `;
-
-    const { rows } = await pool.query(query, [season]);
+    const rows = await getConstructors(season);
 
     const construcotrs = rows.map((row) => ({
       id: row.id,
