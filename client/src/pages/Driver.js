@@ -3,6 +3,7 @@ import axios from 'axios';
 import classes from './Driver.module.css';
 import { useEffect, useState } from 'react';
 import defaultDriverImage from '../assets/default-driver.png';
+import cupIcon from '../assets/cup.svg';
 
 function DriverPage() {
   const { id } = useParams();
@@ -44,18 +45,123 @@ function DriverPage() {
           <p>{driverData.number ?? 'N/A'}</p>
           <p>
             {new Date(driverData.dateOfBirth).toLocaleDateString('en-GB')} -{' '}
-            {driverData.dateOfDeath ?? 'present'}
+            {driverData.dateOfDeath
+              ? new Date(driverData.dateOfDeath).toLocaleDateString('en-GB')
+              : 'present'}
           </p>
         </div>
       </section>
-      <h1>Driver Page for Driver {id}</h1>
-      <div className={classes.driverData}>
-        {Object.entries(driverData).map(([key, value]) => (
-          <div key={key} className={classes.dataItem}>
-            <strong>{key}:</strong> {value !== null ? value : 'N/A'}
+      <section className={classes.careerStats}>
+        <h2 className={classes.sectionTitle}>Career Stats</h2>
+        <div className={classes.stats}>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Best Championship Position</p>
+            </div>
+            <p className={classes.statValue}>
+              {driverData.bestChampionshipPosition}
+            </p>
           </div>
-        ))}
-      </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Best Starting Grid Position</p>
+            </div>
+            <p className={classes.statValue}>
+              {driverData.bestStartingGridPosition}
+            </p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Best Race Result</p>
+            </div>
+            <p className={classes.statValue}>{driverData.bestRaceResult}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Championship Wins</p>
+            </div>
+            <p className={classes.statValue}>
+              {driverData.totalChampionshipWins}
+            </p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Race Entries</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalRaceEntries}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Race Starts</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalRaceStarts}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Race Wins</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalRaceWins}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Race Laps</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalRaceLaps}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Podiums</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalPodiums}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Points</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalPoints}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Pole Positions</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalPolePositions}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Fastest Laps</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalFastestLaps}</p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Driver of the Day</p>
+            </div>
+            <p className={classes.statValue}>
+              {driverData.totalDriverOfTheDay}
+            </p>
+          </div>
+          <div className={classes.stat}>
+            <div className={classes.statTitle}>
+              <img src={cupIcon} alt="Stat icon" />
+              <p>Grand Slams</p>
+            </div>
+            <p className={classes.statValue}>{driverData.totalGrandSlams}</p>
+          </div>
+        </div>
+      </section>
     </section>
   );
 }
