@@ -131,6 +131,17 @@ async function getDriverCareerStats(id) {
   }
 }
 
+async function getConstructorStats(id) {
+  try {
+    const query = readQuery(path.join(queriesPath, 'getConstructorStats.sql'));
+    const { rows } = await pool.query(query, [id]);
+    return rows;
+  } catch (err) {
+    console.log('Error fetching constructor stats:', err);
+    throw err;
+  }
+}
+
 export {
   getDrivers,
   getConstructors,
@@ -143,4 +154,5 @@ export {
   getQualifyingResults,
   getRaceResults,
   getDriverCareerStats,
+  getConstructorStats,
 };
