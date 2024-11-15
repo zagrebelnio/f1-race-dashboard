@@ -7,6 +7,7 @@ import ConstructorsPage from './pages/Constructors';
 import ComparisonPage from './pages/Comparison';
 import DriverPage from './pages/Driver';
 import ConstructorPage from './pages/Constructor';
+import { SeasonProvider } from './context/SeasonContext';
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <SeasonProvider>
+      <RouterProvider router={router} />
+    </SeasonProvider>
+  );
 }
 
 export default App;

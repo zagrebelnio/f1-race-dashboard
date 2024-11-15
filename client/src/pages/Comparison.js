@@ -14,6 +14,7 @@ import {
 } from 'chart.js';
 import SectionButton from '../components/SectionButton';
 import classes from './Comparison.module.css';
+import { useSeason } from '../context/SeasonContext';
 
 ChartJS.register(
   CategoryScale,
@@ -27,25 +28,12 @@ ChartJS.register(
 );
 
 function ComparisonPage() {
-  const [seasons, setSeasons] = useState([]);
-  const [season, setSeason] = useState(2024);
+  const { season, seasons, setSeason } = useSeason();
   const [type, setType] = useState('drivers');
   const [lineChartData, setLineChartData] = useState({
     labels: [],
     datasets: [],
   });
-
-  useEffect(() => {
-    const fetchSeasons = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/api/seasons');
-        setSeasons(response.data);
-      } catch (error) {
-        console.log('Error fetching seasons: ', error);
-      }
-    };
-    fetchSeasons();
-  }, []);
 
   useEffect(() => {
     const fetchResults = async () => {
