@@ -2,14 +2,11 @@ import ConstructorCard from '../components/ConstructorCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import classes from './Constructors.module.css';
-
-const options = {
-  seasons: Array.from({ length: 75 }, (_, index) => 2024 - index),
-};
+import { useSeason } from '../context/SeasonContext';
 
 function ConstructorsPage() {
   const [teams, setTeams] = useState([]);
-  const [season, setSeason] = useState(2024);
+  const { season, seasons, setSeason } = useSeason();
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -34,9 +31,9 @@ function ConstructorsPage() {
           value={season}
           onChange={(e) => setSeason(e.target.value)}
         >
-          {options.seasons.map((season) => (
-            <option key={season} value={season}>
-              {season}
+          {seasons.map((season) => (
+            <option key={season.year} value={season.year}>
+              {season.year}
             </option>
           ))}
         </select>
