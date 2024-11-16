@@ -4,16 +4,17 @@ import { getConstructors, getConstructorStats } from './database/index.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const season = req.query.season;
+  const season = req.query.season || null;
+  let name = req.query.name || '';
 
-  if (!season) {
+  if (season === undefined) {
     return res.status(400).json({ error: 'Season parameter is required' });
   }
 
   try {
-    const rows = await getConstructors(season);
+    const rows = await getConstructors(season, name);
 
-    const construcotrs = rows.map((row) => ({
+    const constructors = rows.map((row) => ({
       id: row.id,
       name: row.name,
       logo: row.logo,
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
     if (rows.length === 0) {
       res.status(404).json({ error: 'No data found for this season' });
     } else {
-      res.status(200).json(construcotrs);
+      res.status(200).json(constructors);
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
