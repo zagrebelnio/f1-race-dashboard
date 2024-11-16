@@ -32,7 +32,6 @@ function ConstructorsPage() {
           value={season}
           onChange={(e) => setSeason(e.target.value)}
         >
-          <option value="">All</option>
           {seasons.map((season) => (
             <option key={season.year} value={season.year}>
               {season.year}
