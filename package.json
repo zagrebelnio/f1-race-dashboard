@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "prettier": "^3.3.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server/index.js --watch server",
-    "client": "npm run start --prefix client"
+    "client": "npm run start --prefix client",
+    "format": "prettier --write client/**/*.{js,jsx,ts,tsx} server/**/*.{js,jsx,ts,tsx}",
+    "format:check": "prettier --check client/**/*.{js,jsx,ts,tsx} server/**/*.{js,jsx,ts,tsx}"
   },
   "keywords": [],
   "author": "",
