@@ -15,10 +15,10 @@ async function getDrivers(year) {
   }
 }
 
-async function getConstructors(year) {
+async function getConstructors(year, name) {
   try {
     const query = readQuery(path.join(queriesPath, 'getConstructors.sql'));
-    const { rows } = await pool.query(query, [year]);
+    const { rows } = await pool.query(query, [year || null, name]);
     return rows;
   } catch (err) {
     console.log('Error fetching constructors:', err);
