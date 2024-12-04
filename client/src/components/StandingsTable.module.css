@@ -1,4 +1,4 @@
-.standingTable{
+.tableBody{
     margin: 0;
     display: flex;
     justify-content: center;
@@ -24,12 +24,12 @@ thead th{
  }
 
 thead{
-    background-color: #B1B1B1;
+    background-color: var(--color-gray);
 }
 
 tbody td{
     padding: 0px 14px;
-    background-color: #D9D9D9;
+    background-color: var(--color-light-gray-table);
 }
 
 thead th:first-child {
