@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "standings",
-        element: <div>Standings Page</div>,
+        element: <StandingsPage />,
       },
       {
         path: 'results',
