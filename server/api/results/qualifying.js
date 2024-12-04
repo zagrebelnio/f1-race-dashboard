@@ -1,6 +1,7 @@
 import express from 'express';
-import pool from '../db.js';
+import pool from '../database/pool.js';
 import readQuery from '../util/readQuery.js';
+import { getQualifyingResults } from '../database/index.js';
 
 const router = express.Router();
 
@@ -15,9 +16,7 @@ router.get('/', async (req, res) => {
         .json({ error: 'Season and round parameters are required' });
     }
 
-    const query = readQuery('./server/api/queries/getQualifyingResults.sql');
-
-    const { rows } = await pool.query(query, [season, round]);
+    const rows = await getQualifyingResults(season, round);
 
     const data = rows.map((row) => ({
       position: row.position,

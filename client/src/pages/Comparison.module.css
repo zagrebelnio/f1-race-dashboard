@@ -1,0 +1,24 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 80px;
+  background-color: var(--color-gray);
+}
+
+.search select {
+  background-color: var(--color-white);
+  border: none;
+  height: 40px;
+  padding: 0 20px;
+  font-size: var(--font-size-24);
+  font-family: var(--font-family-montserrat);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.content {
+  background-color: var(--color-light-gray);
+  padding: 20px 100px;
+}

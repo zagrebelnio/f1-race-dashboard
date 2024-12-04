@@ -1,6 +1,5 @@
 import express from 'express';
-import pool from '../db.js';
-import readQuery from '../util/readQuery.js';
+import { getPracticeResults } from '../database/index.js';
 
 const router = express.Router();
 
@@ -16,9 +15,7 @@ router.get('/', async (req, res) => {
         .json({ error: 'Season, round and practice parameters are required' });
     }
 
-    const query = readQuery('./server/api/queries/getPracticeResults.sql');
-
-    const { rows } = await pool.query(query, [season, round, practice]);
+    const rows = await getPracticeResults(season, round, practice);
 
     const data = rows.map((row) => ({
       position: row.position,

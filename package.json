@@ -4,13 +4,30 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server/index.js --watch server",
-    "client": "npm run start --prefix client"
+    "client": "npm run start --prefix client",
+    "format": "prettier --write client/**/*.{js,jsx,ts,tsx} server/**/*.{js,jsx,ts,tsx}",
+    "format:check": "prettier --check client/**/*.{js,jsx,ts,tsx} server/**/*.{js,jsx,ts,tsx}"
+  },
+  "lint-staged": {
+    "client/**/*.{js,jsx,ts,tsx}": "prettier --write",
+    "server/**/*.{js,jsx,ts,tsx}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "keywords": [],
   "author": "",

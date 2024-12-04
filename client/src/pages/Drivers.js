@@ -1,17 +1,13 @@
 import DriverCard from '../components/DriverCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useSeason } from '../context/SeasonContext';
 import classes from './Drivers.module.css';
-
-const options = {
-  seasons: Array.from({ length: 75 }, (_, index) => 2024 - index),
-  teams: ['Red Bull', 'Mercedes', 'Ferrari', 'McLaren', 'Aston Martin'],
-};
 
 function DriversPage() {
   const [drivers, setDrivers] = useState([]);
-  const [season, setSeason] = useState(2024);
+  const [name, setName] = useState('');
+  const { season, seasons, setSeason } = useSeason();
 
   useEffect(() => {
     const fetchDrivers = async () => {
@@ -28,6 +24,12 @@ function DriversPage() {
     fetchDrivers();
   }, [season]);
 
+  const filteredDrivers = drivers.filter((driver) =>
+    `${driver.firstName} ${driver.lastName}`
+      .toLowerCase()
+      .includes(name.toLowerCase())
+  );
+
   return (
     <>
       <section className={classes.search}>
@@ -36,23 +38,22 @@ function DriversPage() {
           id="season"
           onChange={(e) => setSeason(e.target.value)}
         >
-          {options.seasons.map((season) => (
-            <option key={season} value={season}>
-              {season}
+          {seasons.map((season) => (
+            <option key={season.year} value={season.year}>
+              {season.year}
             </option>
           ))}
         </select>
-        <input type="text" placeholder="Enter name..." id="name" />
-        <select name="team" id="team">
-          {options.teams.map((team) => (
-            <option key={team} value={team}>
-              {team}
-            </option>
-          ))}
-        </select>
+        <input
+          type="text"
+          placeholder="Enter name..."
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </section>
       <section className={classes.content}>
-        {drivers.map((driver) => (
+        {filteredDrivers.map((driver) => (
           <DriverCard key={driver.id} driver={driver} />
         ))}
       </section>

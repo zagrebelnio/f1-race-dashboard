@@ -2,20 +2,18 @@ import ConstructorCard from '../components/ConstructorCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import classes from './Constructors.module.css';
-
-const options = {
-  seasons: Array.from({ length: 75 }, (_, index) => 2024 - index),
-};
+import { useSeason } from '../context/SeasonContext';
 
 function ConstructorsPage() {
   const [teams, setTeams] = useState([]);
-  const [season, setSeason] = useState(2024);
+  const [name, setName] = useState('');
+  const { season, seasons, setSeason } = useSeason();
 
   useEffect(() => {
     const fetchTeams = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/constructors?season=${season}`
+          `http://localhost:8080/api/constructors?season=${season}&name=${name}`
         );
         setTeams(response.data);
       } catch (error) {
@@ -23,7 +21,7 @@ function ConstructorsPage() {
       }
     };
     fetchTeams();
-  }, [season]);
+  }, [season, name]);
 
   return (
     <>
@@ -34,13 +32,18 @@ function ConstructorsPage() {
           value={season}
           onChange={(e) => setSeason(e.target.value)}
         >
-          {options.seasons.map((season) => (
-            <option key={season} value={season}>
-              {season}
+          {seasons.map((season) => (
+            <option key={season.year} value={season.year}>
+              {season.year}
             </option>
           ))}
         </select>
-        <input type="text" placeholder="Enter name..." />
+        <input
+          type="text"
+          placeholder="Enter name..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </section>
       <section className={classes.content}>
         {teams.map((team) => (
