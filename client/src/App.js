@@ -5,6 +5,7 @@ import HomePage from "./pages/Home";
 import DriversPage from "./pages/Drivers";
 import ConstructorsPage from "./pages/Constructors";
 import StandingsPage from "./pages/Standings";
+import ResultsPage from "./pages/Results";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "results",
-        element: <div>Results Page</div>,
+        element: <ResultsPage />,
       },
     ],
   },
