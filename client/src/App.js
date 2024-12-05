@@ -9,6 +9,7 @@ import DriverPage from './pages/Driver';
 import ConstructorPage from './pages/Constructor';
 import { SeasonProvider } from './context/SeasonContext';
 import StandingsPage from "./pages/Standings";
+import ResultsPage from "./pages/Results";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'results',
-        element: <div>Results Page</div>,
+        element: <ResultsPage />,
       },
       {
         path: 'comparison',
