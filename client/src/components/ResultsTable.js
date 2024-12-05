@@ -1,40 +1,42 @@
-import classes from './DriverTable.module.css'
-import flagNl from '../assets/nederlands.png'
-import redBullLogo from '../assets/redBullLogo.png'
+import classes from './ResultsTable.module.css'
 
-const DriverTable = ({ activeButton }) => {
+const ResultsTable = ({ activeButton }) => {
   return (
-    <main className={classes.standingTable}>
       <section className={classes.tableBody}>
         <table>
           <thead>
               <tr>
                   <th>Pos</th>
-                  {activeButton === 'drivers' && <th>Drivers</th>}
-                  <th>Constructors</th>
+                  <th>Driver</th>
+                  <th>Constructor</th>
+                  <th>Time</th>
+                  <th>Laps</th>
                   <th>Points</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                   <td>1</td>
-                  {activeButton === 'drivers' && <td><img src={flagNl} alt='flag'/>Max VERSTAPPEN</td>}
-                  <td className={classes.constructorColumn}><img src={redBullLogo} alt='logo'/>Red Bull Racing</td>
-                  <td>303</td>
+                  <td>Max VERSTAPPEN</td>
+                  <td className={classes.constructorColumn}>Red Bull Racing</td>
+                  <td>1:14:40.727</td>
+                  <td>52</td>
+                  <td>25</td>
               </tr>
               <tr>
                   <td>2</td>
-                  {activeButton === 'drivers' && <td><img src={flagNl} alt='flag'/>Lando NORRIS</td>}
-                  <td className={classes.constructorColumn}><img src={redBullLogo} alt='logo'/>McLaren</td>
-                  <td>241</td>
+                  <td>Lando NORRIS</td>
+                  <td className={classes.constructorColumn}>McLaren</td>
+                  <td>+2.44</td>
+                  <td>52</td>
+                  <td>18</td>
               </tr>
             </tbody>
           </table>  
       </section>
-    </main>
   )
 }
 
-export default DriverTable
+export default ResultsTable
 
 
