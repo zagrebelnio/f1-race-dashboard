@@ -1,0 +1,18 @@
+.button {
+  padding: 5px 30px;
+  font-size: var(--font-size-24);
+  font-family: var(--font-family-montserrat);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.unselected {
+  background-color: var(--color-white);
+  color: var(--color-red);
+}

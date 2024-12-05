@@ -1,7 +1,7 @@
 import express from 'express';
-import pool from './db.js';
-import axios from 'axios';
+import { getDrivers, getDriverCareerStats } from './database/index.js';
 import fetchDriverImages from './util/fetchDriverImages.js';
+import fetchDriverImageByName from './util/fetchDriverImageByName.js';
 
 const router = express.Router();
 
@@ -13,29 +13,7 @@ router.get('/', async (req, res) => {
   }
 
   try {
-    const query = `
-      SELECT DISTINCT ON (sd.position_number) d.first_name,
-                   d.id,
-                   d.last_name,
-                   d.abbreviation,
-                   d.permanent_number AS number,
-                   country.alpha2_code,
-                   c.name AS team,
-                   c.color AS team_color,
-                   c.logo AS team_logo
-      FROM season_driver sd
-      JOIN driver d ON sd.driver_id = d.id
-      JOIN season_entrant_driver sed ON sed.driver_id = d.id
-      AND sed.year = sd.year
-      JOIN
-      CONSTRUCTOR c ON c.id = sed.constructor_id
-      JOIN country ON country.id = d.nationality_country_id
-      WHERE sd.year = $1
-        AND position_number IS NOT NULL
-      ORDER BY position_number ASC;
-    `;
-
-    const { rows } = await pool.query(query, [season]);
+    const rows = await getDrivers(season);
 
     const driverImages = await fetchDriverImages(season);
     const data = rows.map((row) => {
@@ -72,6 +50,52 @@ router.get('/', async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const rows = await getDriverCareerStats(id);
+
+    if (rows.length === 0) {
+      res.status(404).json({ error: 'No such driver found' });
+    }
+
+    const [row] = rows;
+
+    const driverImage = await fetchDriverImageByName(row.name);
+
+    const driverData = {
+      id: row.id,
+      name: row.name,
+      abbreviation: row.abbreviation,
+      number: row.permanent_number,
+      image: driverImage,
+      dateOfBirth: row.date_of_birth,
+      dateOfDeath: row.date_of_death,
+      countryCode: row.alpha2_code,
+      countryName: row.country_name,
+      bestChampionshipPosition: row.best_championship_position,
+      bestStartingGridPosition: row.best_starting_grid_position,
+      bestRaceResult: row.best_race_result,
+      totalChampionshipWins: row.total_championship_wins,
+      totalRaceEntries: row.total_race_entries,
+      totalRaceStarts: row.total_race_starts,
+      totalRaceWins: row.total_race_wins,
+      totalRaceLaps: row.total_race_laps,
+      totalPodiums: row.total_podiums,
+      totalPoints: row.total_points,
+      totalPolePositions: row.total_pole_positions,
+      totalFastestLaps: row.total_fastest_laps,
+      totalDriverOfTheDay: row.total_driver_of_the_day,
+      totalGrandSlams: row.total_grand_slams,
+    };
+
+    res.status(200).send(driverData);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
   }
 });
 
