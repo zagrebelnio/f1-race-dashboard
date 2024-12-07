@@ -1,6 +1,5 @@
 import classes from './StandingsTable.module.css';
-// import flagNl from '../assets/nederlands.png';
-// import redBullLogo from '../assets/redBullLogo.png';
+import teamPlaceholder from '../assets/default-team.jpg';
 
 const StandingsTable = ({ data, type }) => {
   return (
@@ -19,25 +18,37 @@ const StandingsTable = ({ data, type }) => {
             <tr key={row.position}>
               <td
                 style={{
-                  borderRight: `10px solid ${row.team.color ?? '#b6b6b6'}`,
+                  borderRight: `10px solid ${row.team?.color ?? row.color ?? '#b6b6b6'}`,
                 }}
               >
                 {row.position}
               </td>
               {type === 'drivers' && (
                 <td>
-                  <img
-                    src={`https://flagsapi.com/${row.nationality.code}/flat/64.png`}
-                    alt="flag"
-                  />
+                  {row.nationality?.code && (
+                    <img
+                      className={classes.flag}
+                      src={`https://flagsapi.com/${row.nationality.code}/flat/64.png`}
+                      alt={`${row.nationality.code} flag`}
+                    />
+                  )}
                   {row.firstName} {row.lastName}
                 </td>
               )}
-              <td style={{ backgroundColor: row.team.color ?? '#b6b6b6' }}>
-                <img src={row.team.logo} alt="Team logo" />
-                {row.team.name}
+              <td
+                style={{
+                  backgroundColor: row.team?.color ?? row.color ?? '#b6b6b6',
+                }}
+              >
+                <img
+                  className={classes.teamLogo}
+                  src={row.team?.logo ?? row.logo}
+                  alt={`${row.team?.name ?? row.name} logo`}
+                  onError={(e) => (e.target.src = teamPlaceholder)}
+                />
+                {row.team?.name ?? row.name}
               </td>
-              <td>{row.points}</td>
+              <td>{Number.parseFloat(row.points).toString()}</td>
             </tr>
           ))}
         </tbody>
