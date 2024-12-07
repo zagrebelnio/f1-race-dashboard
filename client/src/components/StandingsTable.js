@@ -5,7 +5,7 @@ const StandingsTable = ({ data, type }) => {
   return (
     <section className={classes.tableBody}>
       <table className={classes.table}>
-        <thead>
+        <thead className={classes.thead}>
           <tr>
             <th>Pos</th>
             {type === 'drivers' && <th>Driver</th>}
@@ -13,7 +13,7 @@ const StandingsTable = ({ data, type }) => {
             <th>Points</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={classes.tbody}>
           {data.map((row) => (
             <tr key={row.position}>
               <td
