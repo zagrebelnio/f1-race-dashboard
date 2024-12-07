@@ -47,7 +47,7 @@ tbody td:first-child {
     width: 5%;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    border-right: 10px solid #3671C6;
+    /* border-right: 10px solid #3671C6; */
   }
 
 tbody td:last-child {
@@ -56,10 +56,10 @@ tbody td:last-child {
     border-top-right-radius: 10px;
     text-align: center;
   }
-
+/* 
 .constructorColumn{
     background-color:  #3671C6;
-  }
+  } */
   
 
 

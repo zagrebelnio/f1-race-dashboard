@@ -1,26 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classes from './Standings.module.css';
 import StandingsTable from '../components/StandingsTable.js';
 import SectionButton from '../components/SectionButton';
 import { useSeason } from '../context/SeasonContext';
+import axios from 'axios';
 
 function StandingsPage() {
-  const [activeButton, setActiveButton] = useState('drivers');
+  const [type, setType] = useState('drivers');
   const { season, seasons, setSeason } = useSeason();
+  const [standings, setStandings] = useState([]);
+
+  useEffect(() => {
+    const fetchStandings = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/standings/${type}?season=${season}`
+        );
+        setStandings(response.data);
+      } catch (error) {
+        console.log('Error fetching standings: ', error);
+      }
+    };
+    fetchStandings();
+  }, [type, season]);
 
   return (
     <div className={classes.mainSection}>
       <section className={classes.search}>
         <div>
           <SectionButton
-            onClick={() => setActiveButton('drivers')}
-            isSelected={activeButton === 'drivers'}
+            onClick={() => setType('drivers')}
+            isSelected={type === 'drivers'}
           >
             Drivers
           </SectionButton>
           <SectionButton
-            onClick={() => setActiveButton('constructors')}
-            isSelected={activeButton === 'constructors'}
+            onClick={() => setType('constructors')}
+            isSelected={type === 'constructors'}
           >
             Constructors
           </SectionButton>
@@ -39,7 +55,7 @@ function StandingsPage() {
         </select>
       </section>
       <section className={classes.content}>
-        <StandingsTable type={activeButton} />
+        <StandingsTable data={standings} type={type} />
       </section>
     </div>
   );

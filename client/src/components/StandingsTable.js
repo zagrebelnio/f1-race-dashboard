@@ -1,8 +1,8 @@
 import classes from './StandingsTable.module.css';
-import flagNl from '../assets/nederlands.png';
-import redBullLogo from '../assets/redBullLogo.png';
+// import flagNl from '../assets/nederlands.png';
+// import redBullLogo from '../assets/redBullLogo.png';
 
-const StandingsTable = ({ type }) => {
+const StandingsTable = ({ data, type }) => {
   return (
     <section className={classes.tableBody}>
       <table className={classes.table}>
@@ -15,34 +15,31 @@ const StandingsTable = ({ type }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            {type === 'drivers' && (
-              <td>
-                <img src={flagNl} alt="flag" />
-                Max VERSTAPPEN
+          {data.map((row) => (
+            <tr key={row.position}>
+              <td
+                style={{
+                  borderRight: `10px solid ${row.team.color ?? '#b6b6b6'}`,
+                }}
+              >
+                {row.position}
               </td>
-            )}
-            <td className={classes.constructorColumn}>
-              <img src={redBullLogo} alt="logo" />
-              Red Bull Racing
-            </td>
-            <td>303</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            {type === 'drivers' && (
-              <td>
-                <img className={classes.img} src={flagNl} alt="flag" />
-                Lando NORRIS
+              {type === 'drivers' && (
+                <td>
+                  <img
+                    src={`https://flagsapi.com/${row.nationality.code}/flat/64.png`}
+                    alt="flag"
+                  />
+                  {row.firstName} {row.lastName}
+                </td>
+              )}
+              <td style={{ backgroundColor: row.team.color ?? '#b6b6b6' }}>
+                <img src={row.team.logo} alt="Team logo" />
+                {row.team.name}
               </td>
-            )}
-            <td className={classes.constructorColumn}>
-              <img src={redBullLogo} alt="logo" />
-              McLaren
-            </td>
-            <td>241</td>
-          </tr>
+              <td>{row.points}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>
