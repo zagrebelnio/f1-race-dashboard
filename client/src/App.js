@@ -8,7 +8,7 @@ import ComparisonPage from './pages/Comparison';
 import DriverPage from './pages/Driver';
 import ConstructorPage from './pages/Constructor';
 import { SeasonProvider } from './context/SeasonContext';
-import StandingsPage from "./pages/Standings";
+import StandingsPage from './pages/Standings';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "standings",
+        path: 'standings',
         element: <StandingsPage />,
       },
       {
