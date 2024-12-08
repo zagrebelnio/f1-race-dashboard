@@ -8,8 +8,8 @@ import ComparisonPage from './pages/Comparison';
 import DriverPage from './pages/Driver';
 import ConstructorPage from './pages/Constructor';
 import { SeasonProvider } from './context/SeasonContext';
-import StandingsPage from "./pages/Standings";
-import ResultsPage from "./pages/Results";
+import StandingsPage from './pages/Standings';
+import ResultsPage from './pages/Results';
 
 const router = createBrowserRouter([
   {
