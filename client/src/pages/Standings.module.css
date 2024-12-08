@@ -11,7 +11,7 @@
     gap: 20px;
     height: 80px;
     background-color: var(--color-gray);
-  }
+}
 
 .search select {
     background-color: var(--color-white);
@@ -28,7 +28,6 @@
     gap: 20px;
 }
 
-
 .search button{
     font-size: var(--font-size-24);
     font-family: var(--font-family-montserrat);
@@ -36,13 +35,4 @@
     border: none;
     border-radius: 15px;
     cursor: pointer;
-}
-
-.normalButton{
-    background-color: var(--color-white);
-}
-
-.activeButton{
-    background-color: var(--color-red);
-    color: white;
 }

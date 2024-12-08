@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     const driverImages = await fetchDriverImages(season);
     const data = rows.map((row) => {
       const fullName = `${row.first_name} ${row.last_name}`;
-      const driverImage = driverImages.find((driver) =>
+      const driverImage = driverImages?.find((driver) =>
         fullName.includes(driver.name)
       );
 
