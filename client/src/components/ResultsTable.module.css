@@ -20,7 +20,7 @@ table{
 }
 
 thead th{
-    padding: 25px 14px;
+    padding: 14px 14px;
  }
 
 thead{
@@ -43,18 +43,20 @@ thead th:last-child {
   }
   
 tbody td:first-child {
-    text-align: center;
     width: 5%;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     border-right: 10px solid #3671C6;
   }
 
-tbody td:last-child {
+.center-text-table{
+  text-align: center;
+}
+
+tbody td:last-child{
     width: 10%;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    text-align: center;
   }
 
 .constructorColumn{
