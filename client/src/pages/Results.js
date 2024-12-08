@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classes from './Results.module.css'
 import ResultsTable from '../components/ResultsTable.js'
+import SectionButton from '../components/SectionButton.js'
 
 const options = {
     seasons: [2024, 2023, 2022, 2021, 2020],
@@ -20,21 +21,35 @@ function ResultsPage (){
     <div className={classes.mainSection}>
         <section className={classes.search}>
             <div>
-                <button onClick={() => handleButtonClick("fp1")} 
-                className={activeButton === "fp1" ? classes.activeButton : classes.normalButton}>
-                    FP1</button>
-                <button onClick={() => handleButtonClick("fp2")}
-                 className={activeButton === "fp2" ? classes.activeButton : classes.normalButton}>
-                    FP2</button>
-                <button onClick={() => handleButtonClick("fp3")}
-                 className={activeButton === "fp3" ? classes.activeButton : classes.normalButton}>
-                    FP3</button>
-                <button onClick={() => handleButtonClick("qualifying")}
-                 className={activeButton === "qualifying" ? classes.activeButton : classes.normalButton}>
-                    Qualifying</button> 
-                <button onClick={() => handleButtonClick("race")}
-                 className={activeButton === "race" ? classes.activeButton : classes.normalButton}>
-                    Race</button>   
+            <SectionButton 
+              isSelected={activeButton === "fp1"} 
+              onClick={() => setActiveButton("fp1")}>
+              FP1
+            </SectionButton>
+            <SectionButton
+              isSelected={activeButton === "fp2"}
+              onClick={() => setActiveButton("fp2")}
+            >
+              FP2
+            </SectionButton>
+            <SectionButton
+              isSelected={activeButton === "fp3"}
+              onClick={() => setActiveButton("fp3")}
+            >
+              FP3
+            </SectionButton>
+            <SectionButton
+              isSelected={activeButton === "qualifying"}
+              onClick={() => setActiveButton("qualifying")}
+            >
+              Qualifying
+            </SectionButton>
+            <SectionButton
+              isSelected={activeButton === "race"}
+              onClick={() => setActiveButton("race")}
+            >
+              Race
+            </SectionButton>
             </div>
             <select name="season" id="races">
             {options.races.map((race) => (
