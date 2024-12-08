@@ -12,10 +12,6 @@ const options = {
 function ResultsPage (){
     const [activeButton, setActiveButton] = useState("race");
 
-    const handleButtonClick = (type) => {
-        setActiveButton(type);
-      };
-
   return (
     
     <div className={classes.mainSection}>
