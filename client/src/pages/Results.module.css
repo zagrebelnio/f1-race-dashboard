@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     background-image: url("../assets/background_results.png");
+    background-size: cover; 
 }
 
 .search {
