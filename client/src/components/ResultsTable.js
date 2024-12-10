@@ -1,7 +1,7 @@
 import classes from './ResultsTable.module.css';
 import fastestLap from '../assets/fastestLap.png';
 
-const ResultsTable = ({ activeButton }) => {
+const ResultsTable = ({ results, type }) => {
   return (
     <section className={classes.tableBody}>
       <table className={classes.table}>
@@ -10,31 +10,61 @@ const ResultsTable = ({ activeButton }) => {
             <th>Pos</th>
             <th>Driver</th>
             <th>Constructor</th>
-            <th>Time</th>
-            <th>Laps</th>
-            <th>Points</th>
+            {type === 'race' && <th>Time</th>}
+            {type === 'race' && <th>Laps</th>}
+            {type === 'qualifying' && <th>Q1</th>}
+            {type === 'qualifying' && <th>Q2</th>}
+            {type === 'qualifying' && <th>Q3</th>}
+            {type === 'qualifying' && <th>Gap</th>}
+            {type === 'practice' && <th>Time</th>}
+            {type === 'practice' && <th>Gap</th>}
+            {type === 'practice' && <th>Laps</th>}
+            {type === 'race' && <th>Points</th>}
           </tr>
         </thead>
         <tbody className={classes.tbody}>
-          <tr>
-            <td className={classes.centerTextTable}>1</td>
-            <td>Max VERSTAPPEN</td>
-            <td className={classes.constructorColumn}>Red Bull Racing</td>
-            <td>1:14:40.727</td>
-            <td className={classes.centerTextTable}>52</td>
-            <td className={classes.centerTextTable}>25</td>
-          </tr>
-          <tr>
-            <td className={classes.centerTextTable}>2</td>
-            <td>Lando NORRIS</td>
-            <td className={classes.constructorColumn}>McLaren</td>
-            <td className={classes.fastestLap}>
-              <span className={classes.span}>+2.44</span>
-              <img src={fastestLap} alt="fastest lap clock" />
-            </td>
-            <td className={classes.centerTextTable}>52</td>
-            <td className={classes.centerTextTable}>18</td>
-          </tr>
+          {results.map((result, index) => (
+            <tr key={index}>
+              <td
+                className={classes.centerTextTable}
+                style={{
+                  borderColor: result.team?.color || '#ccc',
+                }}
+              >
+                {result.position}
+              </td>
+              <td>{`${result.firstName} ${result.lastName}`}</td>
+              <td style={{ backgroundColor: result.team?.color || '#ccc' }}>
+                {result.team?.name || '-'}
+              </td>
+              {type === 'race' && <td>{result.race?.time || '-'}</td>}
+              {type === 'race' && (
+                <td className={classes.centerTextTable}>
+                  {result.race?.laps || '-'}
+                </td>
+              )}
+              {type === 'qualifying' && <td>{result.qualifying?.q1 || '-'}</td>}
+              {type === 'qualifying' && <td>{result.qualifying?.q2 || '-'}</td>}
+              {type === 'qualifying' && <td>{result.qualifying?.q3 || '-'}</td>}
+              {type === 'qualifying' && (
+                <td>{result.qualifying?.gap || '-'}</td>
+              )}
+              {type === 'practice' && <td>{result.practice?.time || '-'}</td>}
+              {type === 'practice' && <td>{result.practice?.gap || '-'}</td>}
+              {type === 'practice' && (
+                <td className={classes.centerTextTable}>
+                  {result.practice?.laps || '-'}
+                </td>
+              )}
+              {type === 'race' && (
+                <td className={classes.centerTextTable}>
+                  {result.race?.points === null
+                    ? 0
+                    : Number.parseFloat(result.race?.points).toString() || '-'}
+                </td>
+              )}
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>

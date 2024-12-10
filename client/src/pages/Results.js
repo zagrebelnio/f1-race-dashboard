@@ -12,6 +12,15 @@ function ResultsPage() {
   const [rounds, setRounds] = useState([]);
   const [results, setResults] = useState([]);
   const [type, setType] = useState('race');
+  const [session, setSession] = useState('race');
+
+  useEffect(() => {
+    if (type.includes('fp')) {
+      setSession('practice');
+    } else {
+      setSession(type);
+    }
+  }, [type]);
 
   useEffect(() => {
     const fetchRounds = async () => {
@@ -29,13 +38,10 @@ function ResultsPage() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      let session = type;
       let practice = '';
-      if (type.includes('fp')) {
-        session = 'practice';
+      if (session === 'practice') {
         practice = type.slice(-1);
       }
-
       try {
         const response = await axios.get(
           `http://localhost:8080/api/results/${session}?season=${season}&round=${round}&practice=${practice}`
@@ -47,7 +53,7 @@ function ResultsPage() {
       }
     };
     fetchResults();
-  }, [type, season, round]);
+  }, [type, season, round, session]);
 
   return (
     <div className={classes.mainSection}>
@@ -110,7 +116,7 @@ function ResultsPage() {
         </select>
       </section>
       <section className={classes.content}>
-        <ResultsTable type={type} />
+        <ResultsTable results={results} type={session} />
       </section>
     </div>
   );

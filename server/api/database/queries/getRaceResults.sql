@@ -19,3 +19,4 @@ JOIN race r ON r.id = rd.race_id
 JOIN driver d ON d.id = rd.driver_id
 JOIN constructor c ON c.id = rd.constructor_id
 WHERE r.year = $1 AND r.round = $2 AND rd.type = 'RACE_RESULT'
+ORDER BY rd.position_display_order ASC;
