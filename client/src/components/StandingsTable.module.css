@@ -69,10 +69,63 @@
   object-fit: contain;
 }
   
+@media screen and (max-width: 768px) {
+  .tableBody {
+    font-size: 18px;
+    padding: 5px;
+  }
 
+  .table {
+    width: 100%;
+    margin: 10px 0;
+  }
 
+  .thead th {
+    padding: 8px 6px;
+    font-size: 16px;
+  }
 
+  .tbody td {
+    padding: 6px;
+    font-size: 14px;
+  }
 
+  .teamLogo {
+    width: 30px;
+    height: 30px;
+  }
 
+  .flag {
+    width: 20px;
+  }
+}
 
+@media screen and (max-width: 480px) {
+  .tableBody {
+    font-size: 14px;
+  }
+
+  .table {
+    border-spacing: 0 5px;
+  }
+
+  .thead th {
+    font-size: 14px;
+    padding: 5px 4px;
+  }
+
+  .tbody td {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .teamLogo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .flag {
+    width: 15px;
+  }
+}
  

@@ -22,3 +22,16 @@
   background-color: var(--color-light-gray);
   padding: 20px 100px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .search {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .search input {
+    width: auto;
+  }
+}

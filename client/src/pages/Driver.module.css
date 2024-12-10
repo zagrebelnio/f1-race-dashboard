@@ -104,3 +104,94 @@
     background-position: left;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .container {
+    padding: 0 50px;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profilePic {
+    height: 250px;
+    width: 250px;
+  }
+
+  .info h1 {
+    font-size: var(--font-size-36);
+  }
+
+  .info p {
+    font-size: var(--font-size-20);
+  }
+
+  .nationality {
+    gap: 15px;
+  }
+
+  .flag {
+    width: 50px;
+    height: 30px;
+  }
+
+  .careerStats {
+    padding: 15px;
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-30);
+  }
+
+  .stats {
+    gap: 15px;
+    align-items: center;
+  }
+
+  .stat {
+    width: 300px;
+  }
+
+  .statValue {
+    font-size: var(--font-size-48);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .profilePic {
+    height: 200px;
+    width: 200px;
+  }
+
+  .info h1 {
+    font-size: var(--font-size-30);
+  }
+
+  .info p {
+    font-size: var(--font-size-18);
+  }
+
+  .flag {
+    width: 40px;
+    height: 25px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stat {
+    width: 100%;
+  }
+
+  .statValue {
+    font-size: var(--font-size-40);
+  }
+}

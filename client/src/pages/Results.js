@@ -1,73 +1,125 @@
-import { useState } from 'react';
-import classes from './Results.module.css'
-import ResultsTable from '../components/ResultsTable.js'
-import SectionButton from '../components/SectionButton.js'
+import { useEffect, useState } from 'react';
+import classes from './Results.module.css';
+import ResultsTable from '../components/ResultsTable.js';
+import SectionButton from '../components/SectionButton.js';
+import { useSeason } from '../context/SeasonContext.js';
+import axios from 'axios';
 
-const options = {
-    seasons: [2024, 2023, 2022, 2021, 2020],
-    races: ['Italy', 'Belgium', 'Miami'],
-  };
+function ResultsPage() {
+  const { season, seasons, setSeason } = useSeason();
 
+  const [round, setRound] = useState(1);
+  const [rounds, setRounds] = useState([]);
+  const [results, setResults] = useState([]);
+  const [type, setType] = useState('race');
+  const [session, setSession] = useState('race');
 
-function ResultsPage (){
-    const [activeButton, setActiveButton] = useState("race");
+  useEffect(() => {
+    if (type.includes('fp')) {
+      setSession('practice');
+    } else {
+      setSession(type);
+    }
+  }, [type]);
+
+  useEffect(() => {
+    const fetchRounds = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/rounds?season=${season}`
+        );
+        setRounds(response.data);
+      } catch (error) {
+        console.log('Error fetching rounds: ', error);
+      }
+    };
+    fetchRounds();
+  }, [season, round, type]);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      let practice = '';
+      if (session === 'practice') {
+        practice = type.slice(-1);
+      }
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/results/${session}?season=${season}&round=${round}&practice=${practice}`
+        );
+        console.log(response.data);
+        setResults(response.data);
+      } catch (error) {
+        console.log('Error fetching results: ', error);
+      }
+    };
+    fetchResults();
+  }, [type, season, round, session]);
 
   return (
-    
     <div className={classes.mainSection}>
-        <section className={classes.search}>
-            <div>
-            <SectionButton 
-              isSelected={activeButton === "fp1"} 
-              onClick={() => setActiveButton("fp1")}>
-              FP1
-            </SectionButton>
-            <SectionButton
-              isSelected={activeButton === "fp2"}
-              onClick={() => setActiveButton("fp2")}
-            >
-              FP2
-            </SectionButton>
-            <SectionButton
-              isSelected={activeButton === "fp3"}
-              onClick={() => setActiveButton("fp3")}
-            >
-              FP3
-            </SectionButton>
-            <SectionButton
-              isSelected={activeButton === "qualifying"}
-              onClick={() => setActiveButton("qualifying")}
-            >
-              Qualifying
-            </SectionButton>
-            <SectionButton
-              isSelected={activeButton === "race"}
-              onClick={() => setActiveButton("race")}
-            >
-              Race
-            </SectionButton>
-            </div>
-            <select name="season" id="races">
-            {options.races.map((race) => (
-                <option key={race} value={race}>
-                {race}
-                </option>
-            ))}
-            </select>
-            <select name="season" id="season">
-            {options.seasons.map((season) => (
-                <option key={season} value={season}>
-                {season}
-                </option>
-            ))}
-            </select>
-        </section>
-        <section className={classes.content}>
-            <ResultsTable type={activeButton}/>
-        </section>
+      <section className={classes.search}>
+        <div className={classes.buttons}>
+          <SectionButton
+            isSelected={type === 'fp1'}
+            onClick={() => setType('fp1')}
+          >
+            FP1
+          </SectionButton>
+          <SectionButton
+            isSelected={type === 'fp2'}
+            onClick={() => setType('fp2')}
+          >
+            FP2
+          </SectionButton>
+          <SectionButton
+            isSelected={type === 'fp3'}
+            onClick={() => setType('fp3')}
+          >
+            FP3
+          </SectionButton>
+          <SectionButton
+            isSelected={type === 'qualifying'}
+            onClick={() => setType('qualifying')}
+          >
+            Qualifying
+          </SectionButton>
+          <SectionButton
+            isSelected={type === 'race'}
+            onClick={() => setType('race')}
+          >
+            Race
+          </SectionButton>
+        </div>
+        <select
+          name="races"
+          id="races"
+          value={round}
+          onChange={(e) => setRound(e.target.value)}
+        >
+          {rounds.map((round) => (
+            <option key={round.round} value={round.round}>
+              {round.name}
+            </option>
+          ))}
+        </select>
+        <select
+          name="season"
+          id="season"
+          value={season}
+          onChange={(e) => setSeason(e.target.value)}
+        >
+          {seasons.map((season) => (
+            <option key={season.year} value={season.year}>
+              {season.year}
+            </option>
+          ))}
+        </select>
+      </section>
+      <section className={classes.content}>
+        <ResultsTable results={results} type={session} />
+      </section>
     </div>
-  )
+  );
 }
 
-export default ResultsPage
-
+export default ResultsPage;

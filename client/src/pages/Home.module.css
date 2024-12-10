@@ -25,3 +25,24 @@
   text-align: center;
   width: 1200px;
 }
+
+@media screen and (max-width: 1440px) {
+  .title h1 {
+    width: 1000px;
+    font-size: var(--font-size-64);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .title h1 {
+    width: 600px;
+    font-size: var(--font-size-36);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .title h1 {
+    width: 400px;
+    font-size: var(--font-size-24);
+  }
+}

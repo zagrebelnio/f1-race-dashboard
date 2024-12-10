@@ -142,6 +142,17 @@ async function getConstructorStats(id) {
   }
 }
 
+async function getRounds(year) {
+  try {
+    const query = readQuery(path.join(queriesPath, 'getRounds.sql'));
+    const { rows } = await pool.query(query, [year]);
+    return rows;
+  } catch (err) {
+    console.log('Error fetching rounds:', err);
+    throw err;
+  }
+}
+
 export {
   getDrivers,
   getConstructors,
@@ -155,4 +166,5 @@ export {
   getRaceResults,
   getDriverCareerStats,
   getConstructorStats,
+  getRounds,
 };
