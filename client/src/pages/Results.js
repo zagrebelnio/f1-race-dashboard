@@ -58,7 +58,7 @@ function ResultsPage() {
   return (
     <div className={classes.mainSection}>
       <section className={classes.search}>
-        <div>
+        <div className={classes.buttons}>
           <SectionButton
             isSelected={type === 'fp1'}
             onClick={() => setType('fp1')}

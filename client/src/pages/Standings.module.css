@@ -36,3 +36,15 @@
     border-radius: 15px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .search {
+      flex-direction: column;
+      height: auto;
+      padding: 20px 0;
+    }
+  
+    .search input {
+      width: auto;
+    }
+  }
